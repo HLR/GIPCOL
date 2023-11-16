@@ -1,0 +1,15 @@
+graph_params:
+  model: graphfull
+  dropout: true
+  norm: true
+  nlayers: 
+  gr_emb: d4096,d
+  emb_dim: 768
+  # init: utils/mitstates-graph.t7
+  init: null
+  image_extractor: resnet18
+  train_only: true
+  gcn_type: gcn
+  lr: 5.0e-05
+  weight_decay: 5.0e-05
+

@@ -1,0 +1,5 @@
+common:
+  lr: 5.0e-05
+  weight_decay: 1.0e-5
+  soft_emb_dropout: 0.3
+  clip_model: ViT-L/14

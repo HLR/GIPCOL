@@ -1,0 +1,75 @@
+DataSet:
+  name: 'zappos'
+UseCUDA: True
+UseAvgEmbedding: True
+UseNaturalSplit: True
+
+DataLoader:
+  Train:
+    batch_size: 256
+  Test:
+    batch_size: 100
+  num_worker: 0
+
+CLIP:
+  ImgBackBone: 'ViT-B/16'
+  ImgSize: [224, 224]
+
+Prompt:
+  ContextLen: 3
+  ContextInitStr: ''
+  ContextDim: 512
+  ImgResolution: 224
+  ClassSpecific: False
+  ClassTokenPosition: "end"
+
+  init_prompt_weight: False
+  attr_weight_file: ""
+  obj_weight_file: ""
+  pair_weight_file: ""
+
+Trainer:
+  MAX_EPOCH: 10
+  Prec: 'fp16'
+  CalAttrLoss: False
+  CalObjLoss: False
+  CalPairLoss: True
+
+
+# copy from defaults.py in dassl
+Optim:
+  NAME: "sgd"
+  LR: 5.0e-5
+  WEIGHT_DECAY: 1.0e-5
+  MOMENTUM: 0.9
+  SGD_DAMPNING: 0
+  SGD_NESTEROV: False
+  RMSPROP_ALPHA: 0.99
+  ADAM_BETA1: 0.9
+  ADAM_BETA2: 0.999
+  # STAGED_LR allows different layers to have
+  # different lr, e.g. pre-trained base layers
+  # can be assigned a smaller lr than the new
+  # classification layer
+  STAGED_LR: False
+  NEW_LAYERS: ()
+  BASE_LR_MULT: 0.1
+  # Learning rate scheduler
+  LR_SCHEDULER: "cosine"
+  # -1 or 0 means the stepsize is equal to max_epoch
+  STEPSIZE: (-1, )
+  GAMMA: 0.1
+  MAX_EPOCH: 200
+  # Set WARMUP_EPOCH larger than 0 to activate warmup training
+  WARMUP_EPOCH: 1
+  # Either linear or constant
+  WARMUP_TYPE: "constant"
+  # Constant learning rate when type=constant
+  WARMUP_CONS_LR: 1.0e-5
+  # Minimum learning rate when type=linear
+  WARMUP_MIN_LR: 1.0e-5
+  # Recount epoch for the next scheduler (last_epoch=-1)
+  # Otherwise last_epoch=warmup_epoch
+  WARMUP_RECOUNT: True
+
+output_dir: ""
